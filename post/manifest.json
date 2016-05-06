@@ -1,0 +1,38 @@
+{
+  "manifest_version": 2,
+
+  "name": "Shoppingpost",
+  "description": "Post image",
+  "version": "1.0",
+
+  "icons" : {
+    "16" : "Shoppingpost.png",
+    "48" : "Shoppingpost.png",
+    "128" : "Shoppingpost.png"
+  },
+
+  "browser_action": {
+    "default_icon": "Shoppingpost.png",
+    //"default_popup": "popup.html",
+    "default_title": "Post it"
+  },
+
+  "background": {
+    "scripts": ["background.js"],
+    "persistent": false
+  },
+
+  "content_scripts": [
+      {
+        //"matches": ["http://www.flipkart.com/*"],
+        // "css": ["mystyles.css"],
+        "matches": [ "http://*/*", "https://*/*"],
+        "js": ["jquery.js", "content.js"]
+      }
+    ],
+
+  "permissions": [
+    "activeTab",
+    "<all_urls>"
+  ]
+}

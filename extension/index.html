@@ -1,0 +1,71 @@
+<!doctype html>
+<html>
+	<head>
+		<title>Pin it</title>
+    	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
+    	<script>
+
+    	var url = window.location.href;
+    	var arr = url.split('=')[1];
+
+    	// function pic1()
+     //    {
+     //        document.getElementById("img").src = arr;
+     //    }
+
+        $(document).ready(function() {
+            document.getElementById("img").src = arr;
+        });
+
+
+        function save() {
+        	var link = document.createElement('a');
+        	link.href = arr;  // use realtive url 
+        	link.download = 'image.jpeg';
+        	document.body.appendChild(link);
+        	link.click();
+        }
+
+
+
+        function myFunction() {
+            var x = document.getElementById("myFile").type;
+            document.getElementById("demo").innerHTML = arr;
+        }
+
+
+        function uploadFile() {
+            var blobFile = $('#filechooser')[0].files[0];
+            var fd = new FormData();
+            fd.append("fileToUpload", blobFile);
+
+            $.ajax({
+               url: "upload.php",
+               type: "POST",
+               data: fd,
+               processData: false,
+               contentType: false,
+               success: function(response) {
+                   // .. do something
+               },
+               error: function(jqXHR, textStatus, errorMessage) {
+                   console.log(errorMessage); // Optional
+               }
+            });
+        }
+       
+    	</script>
+  	</head>
+  	<body>
+
+  	<img src = "" id = "img" height="350" width="500" /><br><br>
+  	<!-- <input type="button" value="get image" onclick="pic1()"/> -->
+ 
+	<!-- <button>get data</button> -->
+	<!-- <button type="button">Save image</button> -->
+	<input type="file" id="filechooser">
+	<input type="button" value="Save image" onclick="save()"/><br>
+	<input type="button" value="upload image" onclick="myFunction()"/>
+  	
+  </body>
+</html>
